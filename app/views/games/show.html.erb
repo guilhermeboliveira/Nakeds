@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @game.name %>
+</p>
+
+<p>
+  <b>Responsable:</b>
+  <%= @game.responsable %>
+</p>
+
+<p>
+  <b>Day week:</b>
+  <%= @game.day_week %>
+</p>
+
+<p>
+  <b>Hour start:</b>
+  <%= @game.hour_start %>
+</p>
+
+<p>
+  <b>Hour end:</b>
+  <%= @game.hour_end %>
+</p>
+
+<p>
+  <b>Place:</b>
+  <%= @game.place %>
+</p>
+
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>

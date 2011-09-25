@@ -1,0 +1,46 @@
+<div class="message">
+
+  <div id="messageOwner">
+    <%= user_avatar @question.owner %>
+  </div>
+
+  <div id="messageBody">
+    <h4><%= @question.title %></h4>
+
+    <p class="metadata">
+      <span class="owner"><%= @question.owner.name %></span>
+      <span class="time"><%= time_ago_in_words @question.created_at %></span>
+      <%= actions_for_question @question %>
+    </p>
+
+    <%= @question.body %>
+  </div>
+
+  <%= clearfix %>
+</div>
+
+<% @question.answers.each do |answer| %>
+  <div class="message">
+
+    <div id="messageOwner">
+      <%= user_avatar answer.owner %>
+    </div>
+
+    <div id="messageBody">
+      <p class="metadata">
+        <span class="owner"><%= answer.owner.name %></span>
+        <span class="time"><%= time_ago_in_words answer.created_at %></span>
+      </p>
+
+      <%= answer.body %>
+    </div>
+
+    <%= clearfix %>
+  </div>
+<% end %>
+
+<% if signed_in? %>
+  <div class="answerForm">
+    <%= render "answers/form", question: @question, answer: Answer.new %>
+  </div>
+<% end %>

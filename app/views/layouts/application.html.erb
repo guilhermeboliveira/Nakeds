@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Naked: <%= content_for?(:title) ? yield(:title) : "Community Support" %></title>
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag :defaults %>
+    <%= csrf_meta_tag %>
+    <%= yield(:head) %>
+  </head>
+
+  <body id="<%= body_css_id %>">
+
+    <div id="wrapper">
+
+      <div id="header">
+        <div class="left">
+          Community Support for
+          <strong><%= link_to "My App", root_path %></strong>
+        </div>
+        <div class="right">
+
+          <% if signed_in? %>
+            <%= current_user.email %> |
+            <%= link_to "Profile", edit_user_registration_path %> |
+            <%= link_to "Sign Out", destroy_user_session_path %>
+          <% else %>
+            <%= link_to "Sign In", new_user_session_path %> |
+            <%= link_to "Sign Up", new_user_registration_path %>
+          <% end %>
+
+        </div>
+      </div>
+
+      <div id="content">
+        <div id="container">
+          <div id="innerContainer">
+            <%= flash_messages %>
+
+            <!-- <div id="search">
+              <div id="searchBar">
+
+                <div id="simpleSearch">
+                  <%= form_tag "#" do %>
+                    <%= text_field_tag :search %>
+                    <%= submit_tag "Search", class: "searchButton"  %>
+                  <% end -%>
+                </div>
+
+                <div id="advancedSearch" style="display:none;">
+                  <%= render "shared/advanced_search" %>
+                </div>
+
+              </div>
+            </div>
+
+            <div id="searchOptions">
+              <%= link_to "Advanced search", "#",
+                    id: "displayAdvancedSearch",
+                    class: "right" %>
+            </div> -->
+
+            <%= yield %>
+          </div>
+        </div>
+
+        <div id="sidebar">
+          <p><%= link_to image_tag("logo.png", id: "productLogo"), root_path %></p>
+          <% if signed_in? %>
+            <p><%= link_to 'Ask a Question', new_question_path, id: "addQuestion", class: "button" %></p>
+            <p><%= link_to 'Members List', members_path, class: "button" %></p>
+          <% end %>
+        </div>
+      </div>
+
+      <div id="footer">
+        <p>Powered by <strong><%= link_to "Naked", "http://nakeds.heroku.com/" %></strong></p>
+      </div>
+
+    </div>
+
+    <script type="text/javascript" charset="utf-8">
+      $(function(){
+        function toggleSearchForms(){
+          $('#advancedSearch').toggle();
+          $('#simpleSearch').toggle();
+          $('#displayAdvancedSearch').toggle();
+        }
+
+        $('#displayAdvancedSearch').click(toggleSearchForms);
+        $('#cancelAdvancedSearch').click(toggleSearchForms);
+      });
+    </script>
+  </body>
+</html>

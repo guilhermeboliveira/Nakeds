@@ -1,0 +1,22 @@
+<% content_for :head do %>
+  <%= auto_discovery_link_tag %>
+<% end %>
+
+<div id="questionsList">
+
+  <% @questions.each do |question| %>
+
+    <div class="message">
+      <h4><%= link_to question.title, question %></h4>
+
+      <p class="metadata">
+        <span class="answersCount">2 replies</span>,
+        latest by <span class="questionAuthor">Jonh Doe</span> on
+        <span class="time">Jun 16, 2011 11:14 PM</span>
+
+        <%= actions_for_question question %>
+      </p>
+    </div>
+  <% end %>
+
+</div>
